@@ -1,10 +1,10 @@
-Updates for house_owner
+--Updates for house_owner
 update  house_owner set first_name ='Example' where owner_id = 1
 update  house_owner set last_name ='Example' where owner_id = 1
 update  house_owner set phone_no ='9898989898' where owner_id = 1
 update  house_owner set email = 'example@gmail.com' where owner_id = 1
 
-Updates for House
+--Updates for House
 update house set rent = 123 where house_id = 2;
 update house set smoking = false where house_id = 2;
 update house set parking =false where house_id = 2;
@@ -23,7 +23,7 @@ update house set pets = False where house_id =2;
 update house set max_occ = 3 where house_id =2;
 update house set electricity =False where house_id =2;
 
-student updates :
+--student updates :
  update student set email ='example@gmail.com' where student_id = 4;
 update student set first_name = 'student1' where student_id = 4;
 update student set last_name='lstuden1' where student_id = 4;
@@ -36,11 +36,11 @@ update student set degree_id = 4 where student_id = 4;
 update student set password = 'dasaa' where student_id = 4;
 
 
-Revisit
+--Revisit
 update student set major ='CSE' where student_id = 4;
 
 
-Occupancy Updates:
+--Occupancy Updates:
 
 create or replace procedure update_occupancy(
    old_student_id int,
