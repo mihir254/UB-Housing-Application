@@ -77,3 +77,29 @@ begin
 end;$$;
 call delete_occupancy(2,93);
 
+
+CREATE OR REPLACE FUNCTION update_avg_rating() RETURNS TRIGGER
+language plpgsql
+AS
+
+$$
+BEGIN
+	if new.owner_id is not null then
+    UPDATE house_owner SET 
+	rating = (select avg(r.owner_rating) from rating r where r.owner_id = new.owner_id);
+	end if;
+	if new.student_id is not null then
+	UPDATE student SET 
+	rating = (select avg(r.owner_rating) from rating r where r.student_id = new.student_id);
+	end if;
+
+    RETURN new;
+END;
+$$;
+
+
+CREATE or REPLACE TRIGGER update_rating
+     AFTER INSERT ON rating
+     FOR EACH ROW
+     EXECUTE PROCEDURE update_avg_rating();
+
