@@ -96,10 +96,24 @@ BEGIN
     RETURN new;
 END;
 $$;
-
+----------------------------------------------------------------
 
 CREATE or REPLACE TRIGGER update_rating
      AFTER INSERT ON rating
      FOR EACH ROW
      EXECUTE PROCEDURE update_avg_rating();
 
+create role house_owners;
+grant select,update,delete,insert on house,photo to house_owners;
+create user karthik;
+grant house_owners to karthik;
+----------------------------------------------------------------
+create role admins SUPERUSER;
+create user kusal;
+grant admins to kusal;
+
+----------------------------------------------------------------
+create role student;
+grant select,update,delete,insert on rating,student_occupancy to student;
+create user mihir;
+grant student to mihir;
