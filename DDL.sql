@@ -67,7 +67,7 @@ create table Photo
 	(
 	id INTEGER PRIMARY KEY NOT NULL,
 	house_id INTEGER,
-	links varchar(50),
+	link varchar(50),
 	 FOREIGN KEY(house_id)
 	  		REFERENCES House(house_id) ON DELETE CASCADE
 	);
@@ -92,7 +92,6 @@ create table Student
 	last_name varchar(50) NOT NULL,
 	phone varchar(13) UNIQUE,
 	gender varchar(1),
-	location varchar(100),
 	major_code varchar(3),
 	food_pref varchar(2),
 	nationality varchar(20),
