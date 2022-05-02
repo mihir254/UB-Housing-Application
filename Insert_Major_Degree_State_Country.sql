@@ -1,7 +1,7 @@
 --INSERT QUERIES FOR DEGREEMAJOR, COUNTRY, STATE
 
 
-INSERT INTO Degree_enum(degree_id,name) VALUES
+INSERT INTO Degree(degree_id,name) VALUES
 (1, 'Associate'),
 (2, 'Bachelor'),
 (3, 'Master'),
