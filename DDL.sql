@@ -67,7 +67,7 @@ create table Photo
 	(
 	id INTEGER PRIMARY KEY NOT NULL,
 	house_id INTEGER,
-	links varchar(50),
+	link varchar(50),
 	 FOREIGN KEY(house_id)
 	  		REFERENCES House(house_id) ON DELETE CASCADE
 	);
