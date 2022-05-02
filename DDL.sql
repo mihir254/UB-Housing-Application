@@ -1,17 +1,15 @@
-
--- DROP table State;
--- DROP table Country;
--- DROP TABLE Rating;
+--
+-- DROP TABLE House_Rating;
+-- DROP TABLE House_Owner_Rating;
 -- DROP TABLE Sublet;
 -- DROP TABLE Student_Occupancy;
 -- DROP TABLE Student;
 -- DROP TABLE Major;
--- DROP TABLE Degree_enum;
+-- DROP TABLE Degree;
 -- DROP TABLE Photo;
 -- DROP TABLE House;
+-- DROP TABLE Street;
 -- DROP TABLE House_Owner;
-
-
 
 create table House_Owner
 	(
@@ -20,26 +18,15 @@ create table House_Owner
 	 last_name varchar(50) not null,
 	 phone_no	varchar(13) UNIQUE,
 	 email	varchar(50) UNIQUE,
-	 rating	INTEGER,
+	 rating	DECIMAL(2,1),
 	 password varchar(50)
 	);
 
-create table Country
-		(
-		country_id INTEGER PRIMARY KEY NOT NULL,
-		iso_code varchar(3),
-		name varchar(50),
-		phonecode INTEGER
-		);
 
-
-create table State
+create table Street
 	(
-	state_id INTEGER PRIMARY KEY NOT NULL,
-	name varchar(50),
-	country_id INTEGER,
-	FOREIGN KEY(country_id)
-			REFERENCES Country(country_id) ON DELETE CASCADE
+	street_id INTEGER PRIMARY KEY NOT NULL,
+	name varchar(50)
 	);
 
 create table House
@@ -58,14 +45,12 @@ create table House
 		wifi_included BOOLEAN,
 		heating BOOLEAN,
 		line1 varchar(100) NOT NULL,
-		line2 varchar(100) NOT NULL,
-		city varchar(50) NOT NULL,
-		state_id INTEGER NOT NULL,
+		street_id INTEGER NOT NULL,
 		water BOOLEAN,
 		snow BOOLEAN,
 		gas BOOLEAN,
 		trash BOOLEAN,
-		rating INTEGER,
+		rating DECIMAL(2,1),
 		microwave BOOLEAN,
 		washing_machine BOOLEAN,
 		dishwasher BOOLEAN,
@@ -74,8 +59,8 @@ create table House
 		is_occupied BOOLEAN,
 		FOREIGN KEY(owner_id)
 	  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE,
-		FOREIGN KEY(state_id)
-			  REFERENCES State(state_id) ON DELETE SET NULL
+		FOREIGN KEY(street_id)
+			  REFERENCES Street(street_id) ON DELETE SET NULL
 	);
 
 create table Photo
@@ -88,7 +73,7 @@ create table Photo
 	);
 
 
-create table Degree_enum
+create table Degree
 	(
 	degree_id INTEGER PRIMARY KEY NOT NULL,
 	name varchar(50)
@@ -118,7 +103,7 @@ create table Student
 	CHECK (gender_pref in ('m','f','o')),
 	CHECK (food_pref in ('V','NV','NA')),
 	FOREIGN KEY(degree_id)
-	  		REFERENCES Degree_enum(degree_id) ON DELETE SET NULL,
+	  		REFERENCES Degree(degree_id) ON DELETE SET NULL,
 	FOREIGN KEY(major_code)
 				REFERENCES Major(major_code) ON DELETE SET NULL
 	);
@@ -148,21 +133,30 @@ create table Sublet
 	  		REFERENCES Student(student_id) ON DELETE SET NULL
 	);
 
-create table Rating
+create table House_Rating
 	(
 	rating_id INTEGER PRIMARY KEY NOT NULL,
 	student_id INTEGER,
 	house_id INTEGER,
-	owner_id INTEGER,
-	house_rating DECIMAL(1,0),
-	owner_rating DECIMAL(1,0),
+	rating INTEGER,
 	FOREIGN KEY(student_id)
 	  		REFERENCES Student(student_id) ON DELETE CASCADE,
 	FOREIGN KEY(house_id)
-	  		REFERENCES House(house_id) ON DELETE CASCADE,
-	FOREIGN KEY(owner_id)
-	  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE
+	  		REFERENCES House(house_id) ON DELETE CASCADE
 	);
+
+create table House_Owner_Rating
+		(
+		rating_id INTEGER PRIMARY KEY NOT NULL,
+		student_id INTEGER,
+		owner_id INTEGER,
+		rating INTEGER NOT NULL,
+		CHECK (rating BETWEEN 0 AND 5),
+		FOREIGN KEY(student_id)
+		  		REFERENCES Student(student_id) ON DELETE CASCADE,
+		FOREIGN KEY(owner_id)
+		  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE
+		);
 
 
 
