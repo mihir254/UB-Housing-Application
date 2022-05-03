@@ -11,23 +11,18 @@ DROP TABLE House;
 DROP TABLE Street;
 DROP TABLE House_Owner;
 
--- [11:33 AM, 5/3/2022] Kusal Nagabhairava: create table example(id int primary key default nextval('ex') ,v int);
--- [11:33 AM, 5/3/2022] Kusal Nagabhairava: select * from example;
--- insert into example(v) values(2);
--- insert into example(id,v) values(203,3)
 
-
-CREATE SEQUENCE house_owner_id_seq  start 1000;
-CREATE SEQUENCE street_id_seq  start 1000;
-CREATE SEQUENCE house_id_seq  start 1000;
-CREATE SEQUENCE photo_id_seq  start 1000;
-CREATE SEQUENCE degree_id_seq  start 1000;
-CREATE SEQUENCE major_code_seq  start 1000;
-CREATE SEQUENCE occupancy_id_seq  start 1000;
-CREATE SEQUENCE student_id_seq  start 1000;
-CREATE SEQUENCE sublet_id  start 1000;
-CREATE SEQUENCE house_rating_id  start 1000;
-CREATE SEQUENCE house_owner_rating_id  start 1000;
+CREATE SEQUENCE IF NOT EXISTS house_owner_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS street_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS house_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS photo_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS degree_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS major_code_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS student_occupancy_id  start 1000;
+CREATE SEQUENCE IF NOT EXISTS student_id_seq  start 1000;
+CREATE SEQUENCE IF NOT EXISTS sublet_id  start 1000;
+CREATE SEQUENCE IF NOT EXISTS house_rating_id  start 1000;
+CREATE SEQUENCE IF NOT EXISTS house_owner_rating_id  start 1000;
 
 create table House_Owner
 	(
@@ -128,7 +123,7 @@ create table Student
 
 create table Student_Occupancy
 	(
-	occupancy_id INTEGER PRIMARY KEY NOT NULL default nextval('occupancy_id_seq'),
+	occupancy_id INTEGER PRIMARY KEY NOT NULL default nextval('student_occupancy_id'),
 	house_id INTEGER,
 	student_id INTEGER,
 	FOREIGN KEY(house_id)
