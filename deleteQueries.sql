@@ -1,6 +1,4 @@
 -- // DELETE House_Owner and their respective houses also gets deleted and the student's living in that house becomes empty
-
-
 DELETE FROM House_Owner WHERE owner_id = '1';
 -- Note that : The house of this houseOwener is also deleted
 
