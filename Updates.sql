@@ -136,3 +136,27 @@ grant student to mihir;
 ------------------------------------------------------------------
 --Index--
 create index house_id_index on house(house_id);
+
+
+-----------------Trigger to update the student_occupancy when insert happens to sublet---------------
+-------------------------------------------------------------------
+
+CREATE or REPLACE TRIGGER update_student_occupancy_sublet
+     AFTER INSERT ON sublet
+     FOR EACH ROW
+     EXECUTE PROCEDURE update_student_occupancy_with_sublet();
+
+CREATE OR REPLACE FUNCTION update_student_occupancy_with_sublet() RETURNS TRIGGER
+language plpgsql
+AS
+
+$$
+BEGIN
+	if new.student_to is not null then
+    UPDATE student_occupancy SET 
+	student_id = new.student_to where student_id = new.student_from;
+	end if;
+    RETURN new;
+END;
+$$;
+
