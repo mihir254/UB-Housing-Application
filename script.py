@@ -132,7 +132,7 @@ def insert_street(table_name, attributes, tuples):
 	# street_id = random.sample(range(1, 1000), tuples)
 	for i in range(tuples):
 		str_name = "".join(random.choices(string.ascii_lowercase, k = random.randint(4, 8))) + " St."
-		f.write("INSERT INTO " + table_name + " VALUES (" + str(i+1) + ", " + str(str_name) + "');\n")
+		f.write("INSERT INTO " + table_name + " VALUES (" + str(i+1) + ", '" + str(str_name) + "');\n")
 	f.close()
 
 insert_owner("House_Owner", "owner_id, first_name, last_name, phone_no, email, rating, password", 1000)
