@@ -36,7 +36,7 @@ update student set nationality = 'India' where student_id = 4;
 update student set gender_pref = 'm' where student_id = 4;
 update student set degree_id = 4 where student_id = 4;
 update student set password = 'dasaa' where student_id = 4;
-update student set major_code = (select major_code from major where major_name ='MS') where student_id= 1;
+update student set major_code = (select major_code from major where major_name like '%com%' limit 1) where student_id= 4;
 
 
 --Occupancy Updates:----------------------------------------------------------------
@@ -55,7 +55,7 @@ begin
 end;$$;
 
 call update_occupancy(1,2,90);
-
+-------------------------------------------------------------------------------------
 drop procedure delete_occupancy;
 create or replace procedure delete_occupancy(
    
@@ -76,7 +76,7 @@ begin
 end;$$;
 call delete_occupancy(2,93);
 
-
+----------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION update_owner_avg_rating() RETURNS TRIGGER
 language plpgsql
 AS
@@ -96,6 +96,10 @@ CREATE or REPLACE TRIGGER update_owner_rating
      AFTER INSERT ON house_owner_rating
      FOR EACH ROW
      EXECUTE PROCEDURE update_owner_avg_rating();
+-- select * from house_owner_rating where owner_id =2;
+-- select * from house_owner where owner_id =2;
+-- select max(rating_id) from house_owner_rating;
+-- insert into house_owner_rating values(502,80,2,4);
 ----------------------------------------------------------------
 CREATE OR REPLACE FUNCTION update_house_avg_rating() RETURNS TRIGGER
 language plpgsql
@@ -115,6 +119,9 @@ CREATE or REPLACE TRIGGER update_house_rating
      AFTER INSERT ON house_rating
      FOR EACH ROW
      EXECUTE PROCEDURE update_house_avg_rating();
+-- select * from house where house_id =2;
+-- select * from house_rating where house_id =2;
+-- insert into house_rating values(504,70,2,8);
 ----------------------------------------------------------------
 
 create role house_owners;
@@ -141,10 +148,7 @@ create index house_id_index on house(house_id);
 -----------------Trigger to update the student_occupancy when insert happens to sublet---------------
 -------------------------------------------------------------------
 
-CREATE or REPLACE TRIGGER update_student_occupancy_sublet
-     AFTER INSERT ON sublet
-     FOR EACH ROW
-     EXECUTE PROCEDURE update_student_occupancy_with_sublet();
+
 
 CREATE OR REPLACE FUNCTION update_student_occupancy_with_sublet() RETURNS TRIGGER
 language plpgsql
@@ -152,11 +156,22 @@ AS
 
 $$
 BEGIN
-	if new.student_to is not null then
+	if new.sublet_to is not null then
     UPDATE student_occupancy SET 
-	student_id = new.student_to where student_id = new.student_from;
+	student_id = new.sublet_to where student_id = new.sublet_from;
 	end if;
     RETURN new;
 END;
 $$;
+
+
+CREATE or REPLACE TRIGGER update_student_occupancy_sublet
+     AFTER INSERT ON sublet
+     FOR EACH ROW
+     EXECUTE PROCEDURE update_student_occupancy_with_sublet();
+-- select max(sublet_id ) from sublet;
+-- select * from sublet where sublet_from =2;
+-- select * from student_occupancy where student_id =4;
+-- insert into student_occupancy values(201,202,2);
+-- insert into sublet values (501,2,4,'03/05/2022','04/05/2022');
 
