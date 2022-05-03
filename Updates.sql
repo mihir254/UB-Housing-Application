@@ -1,10 +1,10 @@
---Updates for house_owner
+--Updates for house_owner----------------------------------------------------------------
 update  house_owner set first_name ='Example' where owner_id = 1
 update  house_owner set last_name ='Example' where owner_id = 1
 update  house_owner set phone_no ='9898989898' where owner_id = 1
 update  house_owner set email = 'example@gmail.com' where owner_id = 1
 
---Updates for House
+--Updates for House----------------------------------------------------------------
 update house set rent = 123 where house_id = 2;
 update house set smoking = false where house_id = 2;
 update house set parking =false where house_id = 2;
@@ -22,8 +22,10 @@ update house set is_occupied = False where house_id =2;
 update house set pets = False where house_id =2;
 update house set max_occ = 3 where house_id =2;
 update house set electricity =False where house_id =2;
-
---student updates :
+update house set street_id =123 where house_id=1;
+update house set line1 = '1400' where house_id =1;
+update photo set link='https://google.com/photos/abc' where id=2;
+--student updates :----------------------------------------------------------------
  update student set email ='example@gmail.com' where student_id = 4;
 update student set first_name = 'student1' where student_id = 4;
 update student set last_name='lstuden1' where student_id = 4;
@@ -34,13 +36,10 @@ update student set nationality = 'India' where student_id = 4;
 update student set gender_pref = 'm' where student_id = 4;
 update student set degree_id = 4 where student_id = 4;
 update student set password = 'dasaa' where student_id = 4;
+update student set major_code = (select major_code from major where major_name ='MS') where student_id= 1;
 
 
---Revisit
-update student set major ='CSE' where student_id = 4;
-
-
---Occupancy Updates:
+--Occupancy Updates:----------------------------------------------------------------
 
 create or replace procedure update_occupancy(
    old_student_id int,
@@ -78,7 +77,7 @@ end;$$;
 call delete_occupancy(2,93);
 
 
-CREATE OR REPLACE FUNCTION update_avg_rating() RETURNS TRIGGER
+CREATE OR REPLACE FUNCTION update_owner_avg_rating() RETURNS TRIGGER
 language plpgsql
 AS
 
@@ -86,22 +85,37 @@ $$
 BEGIN
 	if new.owner_id is not null then
     UPDATE house_owner SET 
-	rating = (select avg(r.owner_rating) from rating r where r.owner_id = new.owner_id);
+	rating = (select avg(r.rating) from house_owner_rating r where r.owner_id = new.owner_id);
 	end if;
-	if new.student_id is not null then
-	UPDATE student SET 
-	rating = (select avg(r.owner_rating) from rating r where r.student_id = new.student_id);
-	end if;
-
     RETURN new;
 END;
 $$;
 ----------------------------------------------------------------
 
-CREATE or REPLACE TRIGGER update_rating
-     AFTER INSERT ON rating
+CREATE or REPLACE TRIGGER update_owner_rating
+     AFTER INSERT ON house_owner_rating
      FOR EACH ROW
-     EXECUTE PROCEDURE update_avg_rating();
+     EXECUTE PROCEDURE update_owner_avg_rating();
+----------------------------------------------------------------
+CREATE OR REPLACE FUNCTION update_house_avg_rating() RETURNS TRIGGER
+language plpgsql
+AS
+
+$$
+BEGIN
+	if new.house_id is not null then
+    UPDATE house SET 
+	rating = (select avg(r.rating) from house_rating r where r.house_id = new.house_id);
+	end if;
+    RETURN new;
+END;
+$$;
+----------------------------------------------------------------
+CREATE or REPLACE TRIGGER update_house_rating
+     AFTER INSERT ON house_rating
+     FOR EACH ROW
+     EXECUTE PROCEDURE update_house_avg_rating();
+----------------------------------------------------------------
 
 create role house_owners;
 grant select,update,delete,insert on house,photo to house_owners;
@@ -117,3 +131,8 @@ create role student;
 grant select,update,delete,insert on rating,student_occupancy to student;
 create user mihir;
 grant student to mihir;
+
+
+------------------------------------------------------------------
+--Index--
+create index house_id_index on house(house_id);
