@@ -131,3 +131,8 @@ create role student;
 grant select,update,delete,insert on rating,student_occupancy to student;
 create user mihir;
 grant student to mihir;
+
+
+------------------------------------------------------------------
+--Index--
+create index house_id_index on house(house_id);
