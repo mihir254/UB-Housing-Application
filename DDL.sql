@@ -73,7 +73,7 @@ create table House
 		FOREIGN KEY(owner_id)
 	  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE,
 		FOREIGN KEY(street_id)
-			  REFERENCES Street(street_id) ON DELETE SET NULL
+			  REFERENCES Street(street_id) ON DELETE CASCADE
 	);
 
 create table Photo
@@ -170,6 +170,10 @@ create table House_Owner_Rating
 		  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE
 		);
 
+-- INDEXING
+CREATE INDEX ratings_owner_index ON House_Owner_Rating(owner_id);
+CREATE INDEX ratings_house_index ON House_Rating(house_id);
+CREATE INDEX sublet_from_index on Sublet(sublet_from);
 
 
 
