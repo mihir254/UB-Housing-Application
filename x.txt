@@ -1,0 +1,225 @@
+African-American Studies
+AHI
+Art History
+AMS
+American Studies
+APY
+Anthropology
+ARC
+Architecture
+ARI
+Arabic
+ART
+Art
+AS
+Asian Studies
+ASL
+American Sign Language
+BCH
+Biochemistry
+BE
+Biomedical Engineering
+BIO
+Biological Sciences
+BMI
+Biomedical Informatics
+BMS
+Biomedical Sciences
+CDA
+Computational Data-Enabled Sci
+CDS
+Communicative Disorders & Sci
+CE
+Chemical and Biological Engineering
+CEP
+Counseling, School & Ed Psych
+CHB
+Community Hlth & Hlth Behavior
+CHE
+Chemistry
+CHI
+Chinese
+CIE
+Civil, Structural, and Environmental Engineering
+CL
+Classics
+COL
+Comparative Literature
+COM
+Communication
+CPM
+Cora P. Maloney Center
+CSE
+Computer Science & Engineering
+DAC
+Dance
+DMS
+Media Study
+EAS
+Engineering & Applied Sciences
+ECO
+Economics
+EE
+Electrical Engineering
+ELI
+English Language Institute
+ELP
+Educational Leadership and Policy
+END
+Environmental Design
+ENG
+English
+ES
+Exercise Science
+EVS
+Environment and Sustainability
+FR
+French
+GEO
+Geography
+GER
+German
+GGS
+Global Gender Studies
+GLY
+Geology
+GR
+Greek - Ancient
+GRE
+Greek - Modern
+HEB
+Hebrew
+HIN
+Hindi
+HIS
+History
+HON
+Honors College Courses
+IDS
+Indigenous Studies
+IE
+Industrial and Systems Engineering
+ITA
+Italian
+JDS
+Judaic Studies
+JPN
+Japanese
+KOR
+Korean
+LAI
+Learning and Instruction
+LAT
+Latin
+LAW
+Law
+LIN
+Linguistics
+LIS
+Library and Information Studies
+LLS
+Latina/Latino Studies Program
+MAE
+Mechanical & Aerospace Engr
+MCH
+Medicinal Chemistry
+MDI
+Materials Design & Innovation
+MGA
+Management Accounting
+MGB
+Organization & Behavioral Science
+MGE
+Management Economics
+MGF
+Management Finance
+MGG
+General Management
+MGI
+Management Industrial Relation
+MGM
+Management Marketing
+MGO
+Management Operations Analysis
+MGQ
+Management Quantitative Method
+MGS
+Management Science and Systems
+MGT
+Management and Policy
+MIC
+Microbiology And Immunology
+MLS
+Military Leadership
+MT
+Medical Technology
+MTH
+Mathematics
+MTR
+Music Theatre
+MUS
+Music
+NBC
+RN-BS Nursing
+NBS
+Traditional BS Nursing
+NMD
+Nuclear Medicine
+NRS
+Neuroscience
+NSG
+Undergraduate Nursing Core
+NTR
+Nutrition
+OT
+Occupational Therapy
+PAS
+Pathology & Anatomical Science
+PGY
+Physiology
+PHC
+Pharmaceutical Sciences
+PHI
+Philosophy
+PHM
+Pharmacy
+PHY
+Physics
+PMY
+Pharmacology and Toxicology
+POL
+Polish
+PS
+Polish Studies
+PSC
+Political Science
+PSY
+Psychology
+PUB
+Public Health
+REC
+Recreation Instruction
+RLL
+Romance Languages & Literatures
+RUS
+Russian
+SOC
+Sociology
+SPA
+Spanish
+SSC
+Social Sciences Interdisciplinary
+STA
+Biostatistics
+SW
+Social Work
+TH
+Theatre
+UE
+Undergraduate Education
+UGC
+Undergraduate College
+ULC
+Learning Center
+YID
+Yiddish
