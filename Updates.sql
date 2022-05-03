@@ -24,7 +24,7 @@ update house set max_occ = 3 where house_id =2;
 update house set electricity =False where house_id =2;
 update house set street_id =123 where house_id=1;
 update house set line1 = '1400' where house_id =1;
-
+update photo set link='https://google.com/photos/abc' where id=2;
 --student updates :----------------------------------------------------------------
  update student set email ='example@gmail.com' where student_id = 4;
 update student set first_name = 'student1' where student_id = 4;
