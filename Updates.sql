@@ -55,6 +55,35 @@ begin
 end;$$;
 
 call update_occupancy(1,2,90);
+---------------------------- Occupancy Insert----------------------------
+create or replace procedure insert_occupancy(
+   
+   	houseid int,
+	studentid int
+
+)
+language plpgsql    
+as $$
+declare occupied house.is_occupied%type;
+declare occupants house.max_occ%type;
+declare max_occupants house.max_occ%type;
+begin
+	
+	select house.is_occupied into occupied from house where house_id = houseid;
+	if not occupied then
+		insert into student_occupancy values(nextval('student_occupancy_id'),houseid,studentid);
+		select house.max_occ into max_occupants from house where house_id =houseid;
+		select count(student_occupancy.occupancy_id) into occupants from student_occupancy where house_id =houseid;
+		if occupants = max_occupants then
+		update house set is_occupied  =true where house_id=houseid;
+		end if;
+
+    commit;
+	end if;
+end;$$;
+-- select * from house where house_id =2;
+-- select * from student_occupancy where house_id =2;
+-- call insert_occupancy(2,94);
 -------------------------------------------------------------------------------------
 drop procedure delete_occupancy;
 create or replace procedure delete_occupancy(
