@@ -37,6 +37,7 @@ update student set gender_pref = 'm' where student_id = 4;
 update student set degree_id = 4 where student_id = 4;
 update student set password = 'dasaa' where student_id = 4;
 update student set major = (select major_id from major where major_name ='MS')
+update student set major_code = (select major_code from major where major_name ='MS') where student_id= 1;
 
 
 --Occupancy Updates:----------------------------------------------------------------
