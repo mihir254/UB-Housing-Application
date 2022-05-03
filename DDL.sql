@@ -1,19 +1,37 @@
 --
--- DROP TABLE House_Rating;
--- DROP TABLE House_Owner_Rating;
--- DROP TABLE Sublet;
--- DROP TABLE Student_Occupancy;
--- DROP TABLE Student;
--- DROP TABLE Major;
--- DROP TABLE Degree;
--- DROP TABLE Photo;
--- DROP TABLE House;
--- DROP TABLE Street;
--- DROP TABLE House_Owner;
+DROP TABLE House_Rating;
+DROP TABLE House_Owner_Rating;
+DROP TABLE Sublet;
+DROP TABLE Student_Occupancy;
+DROP TABLE Student;
+DROP TABLE Major;
+DROP TABLE Degree;
+DROP TABLE Photo;
+DROP TABLE House;
+DROP TABLE Street;
+DROP TABLE House_Owner;
+
+-- [11:33 AM, 5/3/2022] Kusal Nagabhairava: create table example(id int primary key default nextval('ex') ,v int);
+-- [11:33 AM, 5/3/2022] Kusal Nagabhairava: select * from example;
+-- insert into example(v) values(2);
+-- insert into example(id,v) values(203,3)
+
+
+CREATE SEQUENCE house_owner_id_seq  start 1000;
+CREATE SEQUENCE street_id_seq  start 1000;
+CREATE SEQUENCE house_id_seq  start 1000;
+CREATE SEQUENCE photo_id_seq  start 1000;
+CREATE SEQUENCE degree_id_seq  start 1000;
+CREATE SEQUENCE major_code_seq  start 1000;
+CREATE SEQUENCE occupancy_id_seq  start 1000;
+CREATE SEQUENCE student_id_seq  start 1000;
+CREATE SEQUENCE sublet_id  start 1000;
+CREATE SEQUENCE house_rating_id  start 1000;
+CREATE SEQUENCE house_owner_rating_id  start 1000;
 
 create table House_Owner
 	(
-	 owner_id INTEGER PRIMARY KEY NOT NULL,
+	 owner_id INTEGER PRIMARY KEY NOT NULL default nextval('house_owner_id_seq'),
 	 first_name	varchar(50) not null,
 	 last_name varchar(50) not null,
 	 phone_no	varchar(13) UNIQUE,
@@ -25,13 +43,13 @@ create table House_Owner
 
 create table Street
 	(
-	street_id INTEGER PRIMARY KEY NOT NULL,
+	street_id INTEGER PRIMARY KEY NOT NULL default nextval('street_id_seq'),
 	name varchar(50)
 	);
 
 create table House
 	(
-		house_id INTEGER PRIMARY KEY NOT NULL,
+		house_id INTEGER PRIMARY KEY NOT NULL default nextval('house_id_seq'),
 		owner_id INTEGER NOT NULL,
 		max_occ INTEGER NOT NULL,
 		bedroom INTEGER NOT NULL,
@@ -65,7 +83,7 @@ create table House
 
 create table Photo
 	(
-	id INTEGER PRIMARY KEY NOT NULL,
+	id INTEGER PRIMARY KEY NOT NULL default nextval('photo_id_seq'),
 	house_id INTEGER,
 	link varchar(50),
 	 FOREIGN KEY(house_id)
@@ -75,18 +93,18 @@ create table Photo
 
 create table Degree
 	(
-	degree_id INTEGER PRIMARY KEY NOT NULL,
+	degree_id INTEGER PRIMARY KEY NOT NULL default nextval('degree_id_seq'),
 	name varchar(50)
 	);
 
 create table Major(
-	major_code varchar(3) PRIMARY KEY NOT NULL,
+	major_code varchar(3) PRIMARY KEY NOT NULL default nextval('major_code_seq'),
 	major_name varchar(50)
 );
 
 create table Student
 	(
-	student_id INTEGER PRIMARY KEY NOT NULL,
+	student_id INTEGER PRIMARY KEY NOT NULL default nextval('student_id_seq'),
 	email varchar(50) UNIQUE,
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
@@ -110,7 +128,7 @@ create table Student
 
 create table Student_Occupancy
 	(
-	occupancy_id INTEGER PRIMARY KEY NOT NULL,
+	occupancy_id INTEGER PRIMARY KEY NOT NULL default nextval('occupancy_id_seq'),
 	house_id INTEGER,
 	student_id INTEGER,
 	FOREIGN KEY(house_id)
@@ -121,7 +139,7 @@ create table Student_Occupancy
 
 create table Sublet
 	(
-	sublet_id INTEGER PRIMARY KEY NOT NULL,
+	sublet_id INTEGER PRIMARY KEY NOT NULL default nextval('sublet_id'),
 	sublet_from INTEGER,
 	sublet_to INTEGER,
 	from_date DATE,
@@ -134,25 +152,25 @@ create table Sublet
 
 create table House_Rating
 	(
-	rating_id INTEGER PRIMARY KEY NOT NULL,
+	rating_id INTEGER PRIMARY KEY NOT NULL default nextval('house_rating_id'),
 	student_id INTEGER,
 	house_id INTEGER,
 	rating INTEGER,
 	FOREIGN KEY(student_id)
-	  		REFERENCES Student(student_id) ON DELETE CASCADE,
+	  		REFERENCES Student(student_id) ON DELETE SET NULL,
 	FOREIGN KEY(house_id)
 	  		REFERENCES House(house_id) ON DELETE CASCADE
 	);
 
 create table House_Owner_Rating
 		(
-		rating_id INTEGER PRIMARY KEY NOT NULL,
+		rating_id INTEGER PRIMARY KEY NOT NULL default nextval('house_owner_rating_id'),
 		student_id INTEGER,
 		owner_id INTEGER,
 		rating INTEGER NOT NULL,
 		CHECK (rating BETWEEN 0 AND 5),
 		FOREIGN KEY(student_id)
-		  		REFERENCES Student(student_id) ON DELETE CASCADE,
+		  		REFERENCES Student(student_id) ON DELETE SET NULL,
 		FOREIGN KEY(owner_id)
 		  		REFERENCES House_Owner(owner_id) ON DELETE CASCADE
 		);
