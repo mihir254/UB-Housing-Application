@@ -107,7 +107,7 @@ def insert_house(table_name, attributes, tuples):
 		wifi = random.choice([True, False])
 		heat = random.choice([True, False])
 		location_lin = "".join(random.choices(string.ascii_lowercase, k = random.randint(4, 8)))
-		location_st = random.randint(1, 1000)
+		location_st = random.randint(1, 200)
 		water = random.choice([True, False])
 		snow = random.choice([True, False])
 		gas = random.choice([True, False])
@@ -131,27 +131,25 @@ def insert_street(table_name, attributes, tuples):
 	f = open("insert.sql", "a")
 	# street_id = random.sample(range(1, 1000), tuples)
 	for i in range(tuples):
-		str_name = "".join(random.choices(string.ascii_lowercase, k = random.randint(4, 8))) + "St."
+		str_name = "".join(random.choices(string.ascii_lowercase, k = random.randint(4, 8))) + " St."
 		f.write("INSERT INTO " + table_name + " VALUES (" + str(i+1) + ", " + str(str_name) + "');\n")
 	f.close()
 
 insert_owner("House_Owner", "owner_id, first_name, last_name, phone_no, email, rating, password", 1000)
+insert_street("Street", "street_id, name", 200)
 insert_house("House", "house_id, owner_id, max_occ, bedroom, bathroom, electricity, no_of_floor, rent, pets, smoking, parking, wifi_included, heating, line1, street_id, water, snow, gas, trash, rating, microwave, washing_machine, dishwasher, oven, stove, is_occupied", 999)
 insert_photos("Photo", "id, house_id, link", 999)
 # insert_degree("degree", 100)
 # insert_student("Student", 1000)
-insert_occupancy("Student_Occupancy", "occupancy_id, house_id, student_id", 200)
-insert_sublet("Sublet", "sublet_id, sublet_from, sublet_to, from_date, to_date", 500)
-insert_rating_owner("House_Rating", "rating_id, student_id, house_id, rating", 500)
-insert_rating_house("House_Owner_Rating", "rating_id, student_id, owner_id, rating", 500)
-
-
 temp = []
 ft = open("x.txt", "r")
 for index, line in enumerate(ft.readlines()):
     if (index) % 2 == 1:
     	temp.append(line[:-1])
-
-
-
 insert_student("Student", "student_id, email, first_name, last_name, phone, gender, major_code, food_pref, nationality, gender_pref, degree_id, password", 1000, temp)
+insert_occupancy("Student_Occupancy", "occupancy_id, house_id, student_id", 200)
+insert_sublet("Sublet", "sublet_id, sublet_from, sublet_to, from_date, to_date", 500)
+insert_rating_house("House_Owner_Rating", "rating_id, student_id, owner_id, rating", 500)
+insert_rating_owner("House_Rating", "rating_id, student_id, house_id, rating", 500)
+
+
