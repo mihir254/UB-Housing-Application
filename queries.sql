@@ -9,3 +9,24 @@ SELECT rating_id as Rating, house_id as House, owner_id as Owner, house_rating a
 SELECT house_id as House, owner_id as Owner, max_occ as 'Maximum Occupants', bedroom as 'Number of bedrooms', bathroom as 'Number of bathrooms', electricity as 'Electricity included', no_of_floor as 'Number of floors', rent as Rent, pets as 'Pets Allowed', smoking as 'Smoking Allowed', parking as 'Parking Space Included', wifi_included as 'Wifi Included', heating as 'Heating Included', location as Location, water as 'Water Included', snow as 'Snow Removal Included', gas as 'Gas Included', trash as 'Trash Included', rating as Rating, microwave as 'Microwave Included', washing_machine as 'Washing Machine Included', dishwasher as 'Dishwasher Included', oven as 'Oven Included', stove as 'Stove Included', is_occupied as 'Is Occupied' FROM House WHERE bedroom < 3;
 SELECT house_id as House, owner_id as Owner, max_occ as 'Maximum Occupants', bedroom as 'Number of bedrooms', bathroom as 'Number of bathrooms', electricity as 'Electricity included', no_of_floor as 'Number of floors', rent as Rent, pets as 'Pets Allowed', smoking as 'Smoking Allowed', parking as 'Parking Space Included', wifi_included as 'Wifi Included', heating as 'Heating Included', location as Location, water as 'Water Included', snow as 'Snow Removal Included', gas as 'Gas Included', trash as 'Trash Included', rating as Rating, microwave as 'Microwave Included', washing_machine as 'Washing Machine Included', dishwasher as 'Dishwasher Included', oven as 'Oven Included', stove as 'Stove Included', is_occupied as 'Is Occupied' FROM House WHERE bedroom < 3 and bathroom > 2 ORDER BY rent;
 SELECT house_id as House, owner_id as Owner, max_occ as 'Maximum Occupants', bedroom as 'Number of bedrooms', bathroom as 'Number of bathrooms', electricity as 'Electricity included', no_of_floor as 'Number of floors', rent as Rent, pets as 'Pets Allowed', smoking as 'Smoking Allowed', parking as 'Parking Space Included', wifi_included as 'Wifi Included', heating as 'Heating Included', location as Location, water as 'Water Included', snow as 'Snow Removal Included', gas as 'Gas Included', trash as 'Trash Included', rating as Rating, microwave as 'Microwave Included', washing_machine as 'Washing Machine Included', dishwasher as 'Dishwasher Included', oven as 'Oven Included', stove as 'Stove Included', is_occupied as 'Is Occupied' FROM House ORDER BY rent;
+
+
+
+SELECT SO.house_id as 'HouseID', H.line1 as 'Address', St.name as 'Street', S.first_name as 'First Name', S.last_name as 'Last Name'
+FROM Student_Occupancy as SO
+JOIN House H ON H.house_id = SO.house_id
+JOIN Student S ON S.student_id = SO.student_id
+JOIN Street St ON St.street_id = H.street_id
+WHERE H.house_id = 2;
+
+select count(student_occupancy.occupancy_id) into occupants
+from student_occupancy O1, student_occupancy O2
+where O1.house_id = O2.houseid;
+
+SELECT SO.house_id, H.line1, St.name, S.student_id, S.last_name, M.major_name
+FROM Student_Occupancy as SO
+JOIN House H ON H.house_id = SO.house_id
+JOIN Student S ON S.student_id = SO.student_id
+JOIN Street St ON St.street_id = H.street_id
+JOIN Major M ON M.major_code = S.major_code
+WHERE M.major_code='CSE' and St.name='fxrzefmd St.'-- group by St.name,SO.house_id, H.line1, St.name, S.student_id, S.last_name, M.major_name;
