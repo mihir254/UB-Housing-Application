@@ -143,7 +143,7 @@ insert_photos("Photo", "id, house_id, link", 1000)
 # insert_degree("degree", 100)
 # insert_student("Student", 1000)
 temp = []
-ft = open("x.txt", "r")
+ft = open("majors.txt", "r")
 for index, line in enumerate(ft.readlines()):
     if (index) % 2 == 1:
     	temp.append(line[:-1])
