@@ -25,6 +25,8 @@ update house set electricity =False where house_id =2;
 update house set street_id =123 where house_id=1;
 update house set line1 = '1400' where house_id =1;
 update photo set link='https://google.com/photos/abc' where id=2;
+
+
 --student updates :----------------------------------------------------------------
  update student set email ='example@gmail.com' where student_id = 4;
 update student set first_name = 'student1' where student_id = 4;
@@ -157,6 +159,7 @@ create role house_owners;
 grant select,update,delete,insert on house,photo to house_owners;
 create user karthik;
 grant house_owners to karthik;
+
 ----------------------------------------------------------------
 create role admins SUPERUSER;
 create user kusal;
@@ -203,4 +206,3 @@ CREATE or REPLACE TRIGGER update_student_occupancy_sublet
 -- select * from student_occupancy where student_id =4;
 -- insert into student_occupancy values(201,202,2);
 -- insert into sublet values (501,2,4,'03/05/2022','04/05/2022');
-
